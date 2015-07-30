@@ -1,7 +1,9 @@
 import pygame
 
-
 def processInput():
+    """ This function returns a dict containing the moves
+    available for the input and if they were activated
+    during the current frame """
     user_input = {}
     user_input["MoveUp"] = False
     user_input["MoveDown"] = False
@@ -18,4 +20,3 @@ def processInput():
             if event.key == pygame.K_DOWN:
                 user_input["MoveDown"] = True
     return user_input
-
