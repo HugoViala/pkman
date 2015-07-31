@@ -2,6 +2,12 @@ import pygame
 import input
 import game
 
+# TODO(hugo): create a v2 class
+# TODO(hugo): adding speed to the player so that the key down keeps going
+# TODO(hugo): make it so that game module does not have to import pygame ?
+# like, the updateAndRender function could return the game state and the list
+# of the rect do display for the window_surface => cleaner
+
 if __name__ == "__main__":
 
     pygame.init()
@@ -24,7 +30,6 @@ if __name__ == "__main__":
             else:
                 user_input.processEvent(event)
         screen.fill((255, 255, 255))
-        # TODO(hugo): should the flip be at that moment ?
         (player_x, player_y) = game.updateAndRender(
             user_input, window_surface,
             player_x, player_y, player_w, player_h)

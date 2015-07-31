@@ -3,6 +3,7 @@ import pygame
 def updateAndRender(user_input, window_surface,
                     player_x, player_y, player_w, player_h):
     """ update the game and render the current frame """
+    # TODO(hugo): create a Player class ? at least handling speed and velocity
     if user_input.move_up:
         player_y -= 5
     if user_input.move_down:
