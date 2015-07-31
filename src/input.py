@@ -6,7 +6,7 @@ class UserInput:
         self.move_up = False
         self.move_left = False
         self.move_down = False
-        self.move_up = False
+        self.move_right = False
         self.action = False
         self.use_controller = False
 
