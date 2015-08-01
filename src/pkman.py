@@ -1,8 +1,8 @@
 import pygame
 import input
 import game
+import pkmath
 
-# TODO(hugo): create a v2 class
 # TODO(hugo): adding speed to the player so that the key down keeps going
 # TODO(hugo): make it so that game module does not have to import pygame ?
 # like, the updateAndRender function could return the game state and the list
@@ -18,10 +18,7 @@ if __name__ == "__main__":
     game_running = True
     user_input = input.UserInput()
     window_surface = pygame.display.get_surface()
-    player_x = 100
-    player_y = 100
-    player_w = 30
-    player_h = 30
+    player = game.Player(100, 100, 30, 30)
     while game_running:
         user_input.reset()
         for event in pygame.event.get():
@@ -30,9 +27,9 @@ if __name__ == "__main__":
             else:
                 user_input.processEvent(event)
         screen.fill((255, 255, 255))
-        (player_x, player_y) = game.updateAndRender(
+        (player.p.x, player.p.y) = game.updateAndRender(
             user_input, window_surface,
-            player_x, player_y, player_w, player_h)
+            player)
         pygame.display.flip()
         clock.tick(60)
     pygame.quit()
