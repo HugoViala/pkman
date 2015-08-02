@@ -2,6 +2,7 @@ import pygame
 import input
 import game
 import pkmath
+import pkcolor
 
 # TODO(hugo): adding speed to the player so that the key down keeps going
 # TODO(hugo): make it so that game module does not have to import pygame ?
@@ -25,7 +26,7 @@ if __name__ == "__main__":
                 game_running = False
             else:
                 user_input.processEvent(event)
-        screen.fill((255, 255, 255))
+        screen.fill(pkcolor.white)
         (player.p.x, player.p.y) = game.updateAndRender(
             user_input, window_surface,
             player)
