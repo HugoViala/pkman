@@ -4,7 +4,6 @@ import game
 import pkmath
 import pkcolor
 
-# TODO(hugo): adding speed to the player so that the key down keeps going
 # TODO(hugo): make it so that game module does not have to import pygame ?
 # like, the updateAndRender function could return the game state and the list
 # of the rect do display for the window_surface => cleaner

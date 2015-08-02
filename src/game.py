@@ -2,6 +2,7 @@ import pygame
 import pkmath
 import pkcolor
 
+# TODO(hugo): add a tilemap and basic collision detection to handle a level
 class Player:
     """ class to handle all the details about a player entity """
     def __init__(self, x, y, w, h):
