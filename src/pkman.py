@@ -20,7 +20,6 @@ if __name__ == "__main__":
     window_surface = pygame.display.get_surface()
     player = game.Player(100, 100, 30, 30)
     while game_running:
-        user_input.reset()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 game_running = False
@@ -31,5 +30,5 @@ if __name__ == "__main__":
             user_input, window_surface,
             player)
         pygame.display.flip()
-        clock.tick(60)
+        clock.tick(30)
     pygame.quit()

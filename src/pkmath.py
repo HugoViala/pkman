@@ -5,3 +5,11 @@ class v2:
     def __init__(self, x=0, y=0):
         self.x = x
         self.y = y
+
+def add(a,b):
+    c = v2(a.x + b.x, a.y + b.y)
+    return c
+
+def times(r, v):
+    c = v2(r * v.x, r * v.y)
+    return c

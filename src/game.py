@@ -13,15 +13,18 @@ class Player:
 def updateAndRender(user_input, window_surface,
                     player):
     """ update the game and render the current frame """
-    # TODO(hugo): create a Player class ? at least handling speed and velocity
+    # TODO(hugo): improve it so that we can enter both direction
+    # TODO(hugo): maybe consider acceleration and equations of motion
+    player.dp = pkmath.v2(0, 0)
     if user_input.move_up:
-        player.p.y -= 5
+        player.dp = pkmath.v2(0, -50)
     if user_input.move_down:
-        player.p.y += 5
+        player.dp = pkmath.v2(0, 50)
     if user_input.move_left:
-        player.p.x -= 5
+        player.dp = pkmath.v2(-50, 0)
     if user_input.move_right:
-        player.p.x += 5
+        player.dp = pkmath.v2(50, 0)
+    player.p = pkmath.add(player.p, pkmath.times(user_input.dt, player.dp))
     player_rect = pygame.Rect(player.p.x, player.p.y, player.w, player.h)
     window_surface.fill((255, 0, 0), player_rect)
     return (player.p.x, player.p.y)
