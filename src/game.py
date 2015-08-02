@@ -28,5 +28,20 @@ def updateAndRender(user_input, window_surface,
         player.dp = pkmath.add(player.dp, pkmath.v2(50, 0))
     player.p = pkmath.add(player.p, pkmath.times(user_input.dt, player.dp))
     player_rect = pygame.Rect(player.p.x, player.p.y, player.w, player.h)
+    tile_map = [[1, 1, 1, 1, 1, 1, 1],
+                [1, 0, 0, 1, 0, 1, 1],
+                [1, 1, 0, 0, 0, 0, 1],
+                [1, 0, 0, 0, 0, 0, 1],
+                [1, 0, 1, 0, 0, 1, 1]]
+    for i in range(len(tile_map)):
+        for j in range(len(tile_map[i])):
+            tile = tile_map[i][j]
+            if tile == 1:
+                window_surface.fill(pkcolor.grey(100),
+                                    pygame.Rect(60*j, 60*i, 60, 60))
+            else:
+                window_surface.fill(pkcolor.grey(0),
+                                    pygame.Rect(60*j, 60*i, 60, 60))
+
     window_surface.fill(pkcolor.red, player_rect)
     return (player.p.x, player.p.y)
