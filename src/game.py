@@ -27,17 +27,29 @@ def updateAndRender(user_input, window_surface,
         player.dp = pkmath.add(player.dp, pkmath.v2(-50, 0))
     if user_input.move_right:
         player.dp = pkmath.add(player.dp, pkmath.v2(50, 0))
-    player.p = pkmath.add(player.p, pkmath.times(user_input.dt, player.dp))
-    player_rect = pygame.Rect(player.p.x, player.p.y, player.w, player.h)
+    player_next_p = pkmath.add(player.p, pkmath.times(user_input.dt, player.dp))
 
     tile_map = [[1, 1, 1, 1, 1, 1, 1],
                 [1, 0, 0, 1, 0, 1, 1],
                 [1, 1, 0, 0, 0, 0, 1],
                 [1, 0, 0, 0, 0, 0, 1],
                 [1, 0, 1, 0, 0, 1, 1]]
-    tile_size = 30
-    for i in range(len(tile_map)):
-        for j in range(len(tile_map[i])):
+    tile_size = 45
+    tile_map_count_x = len(tile_map[0])
+    tile_map_count_y = len(tile_map)
+
+    player_tl_tile_x = int(player_next_p.x / tile_size)
+    player_tl_tile_y = int(player_next_p.y / tile_size)
+    player_br_tile_x = int((player_next_p.x + player.w) / tile_size)
+    player_br_tile_y = int((player_next_p.y + player.h) / tile_size)
+    print(player_br_tile_x)
+    if tile_map[player_tl_tile_y][player_tl_tile_x] == 0:
+        if tile_map[player_br_tile_y][player_br_tile_x] == 0:
+            player.p = player_next_p
+
+    # NOTE(hugo): Rendering
+    for i in range(tile_map_count_y):
+        for j in range(tile_map_count_x):
             tile = tile_map[i][j]
             if tile == 1:
                 window_surface.fill(pkcolor.grey(100),
@@ -48,5 +60,6 @@ def updateAndRender(user_input, window_surface,
                                     pygame.Rect(tile_size*j, tile_size*i,
                                                 tile_size, tile_size))
 
+    player_rect = pygame.Rect(player.p.x, player.p.y, player.w, player.h)
     window_surface.fill(pkcolor.red, player_rect)
     return (player.p.x, player.p.y)

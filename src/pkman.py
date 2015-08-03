@@ -1,7 +1,6 @@
 import pygame
 import input
 import game
-import pkmath
 import pkcolor
 
 # TODO(hugo): make it so that game module does not have to import pygame ?
@@ -21,7 +20,7 @@ if __name__ == "__main__":
     game_running = True
     user_input = input.UserInput()
     window_surface = pygame.display.get_surface()
-    player = game.Player(100, 100, 30, 30)
+    player = game.Player(100, 100, 45, 45)
     frame_per_second = 30
 
     while game_running:
