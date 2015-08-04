@@ -31,7 +31,9 @@ if __name__ == "__main__":
             else:
                 user_input.processEvent(event)
         screen.fill(pkcolor.white)
-        game.updateAndRender(user_input, window_surface, gamestate)
+        rect_list = game.updateAndRender(user_input, gamestate)
+        for c,r in rect_list:
+            window_surface.fill(c,r)
         pygame.display.flip()
         clock.tick(30)
     pygame.quit()
