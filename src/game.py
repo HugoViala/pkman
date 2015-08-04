@@ -5,15 +5,16 @@ import pkcolor
 class GameState:
     def __init__(self):
         self.running = True
-        self.player = Player(100, 100, 30, 30)
+        self.player = Player(100, 100, 30, 30, 50)
 
 class Player:
     """ class to handle all the details about a player entity """
-    def __init__(self, x, y, w, h):
+    def __init__(self, x, y, w, h, speed):
         self.p = pkmath.v2(x, y)
         self.dp = pkmath.v2(0, 0)
         self.w = w
         self.h = h
+        self.speed = speed
 
 
 def updateAndRender(user_input, window_surface,
@@ -25,20 +26,23 @@ def updateAndRender(user_input, window_surface,
     player = gamestate.player
     player.dp = pkmath.v2(0, 0)
     if user_input.move_up:
-        player.dp = pkmath.add(player.dp, pkmath.v2(0, -50))
+        player.dp = pkmath.add(player.dp, pkmath.v2(0, -1))
     if user_input.move_down:
-        player.dp = pkmath.add(player.dp, pkmath.v2(0, 50))
+        player.dp = pkmath.add(player.dp, pkmath.v2(0, 1))
     if user_input.move_left:
-        player.dp = pkmath.add(player.dp, pkmath.v2(-50, 0))
+        player.dp = pkmath.add(player.dp, pkmath.v2(-1, 0))
     if user_input.move_right:
-        player.dp = pkmath.add(player.dp, pkmath.v2(50, 0))
+        player.dp = pkmath.add(player.dp, pkmath.v2(1, 0))
+    player.dp = pkmath.normalize(player.dp)
+    player.dp = pkmath.times(player.speed, player.dp)
     player_next_p = pkmath.add(player.p, pkmath.times(user_input.dt, player.dp))
 
     tile_map = [[1, 1, 1, 1, 1, 1, 1],
                 [1, 0, 0, 1, 0, 1, 1],
                 [1, 1, 0, 0, 0, 0, 1],
                 [1, 0, 0, 0, 0, 0, 1],
-                [1, 0, 1, 0, 0, 1, 1]]
+                [1, 0, 1, 0, 0, 1, 1],
+                [1, 1, 1, 1, 1, 1, 1]]
     tile_size = 45
     tile_map_count_x = len(tile_map[0])
     tile_map_count_y = len(tile_map)

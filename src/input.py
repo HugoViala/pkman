@@ -1,5 +1,7 @@
 import pygame
 
+# TODO(hugo): support gamepad
+# TODO(hugo): support re-mapping keys in the future
 class UserInput:
     """ store the input entered by the user for one frame """
     def __init__(self):
