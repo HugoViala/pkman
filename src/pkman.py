@@ -17,22 +17,21 @@ if __name__ == "__main__":
     window_size = (700, 500)
     screen = pygame.display.set_mode(window_size)
     pygame.display.set_caption("PKMAN")
-    game_running = True
+    gamestate = game.GameState()
     user_input = input.UserInput()
     window_surface = pygame.display.get_surface()
-    player = game.Player(100, 100, 30, 30)
     frame_per_second = 30
 
-    while game_running:
+    while gamestate.running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                game_running = False
+                gamestate.running = False
+            if (event.type == pygame.KEYDOWN or event.type == pygame.KEYUP) and event.key == pygame.K_q:
+                gamestate.running = False
             else:
                 user_input.processEvent(event)
         screen.fill(pkcolor.white)
-        (player.p.x, player.p.y) = game.updateAndRender(
-            user_input, window_surface,
-            player)
+        game.updateAndRender(user_input, window_surface, gamestate)
         pygame.display.flip()
         clock.tick(30)
     pygame.quit()

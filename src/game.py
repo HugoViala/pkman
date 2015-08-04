@@ -2,7 +2,11 @@ import pygame
 import pkmath
 import pkcolor
 
-# TODO(hugo): add a tilemap and basic collision detection to handle a level
+class GameState:
+    def __init__(self):
+        self.running = True
+        self.player = Player(100, 100, 30, 30)
+
 class Player:
     """ class to handle all the details about a player entity """
     def __init__(self, x, y, w, h):
@@ -13,11 +17,12 @@ class Player:
 
 
 def updateAndRender(user_input, window_surface,
-                    player):
+                    gamestate):
     """ update the game and render the current frame """
     # TODO(hugo): maybe consider acceleration and equations of motion
     # for a better game feel
     # TODO(hugo): diagonal are faster
+    player = gamestate.player
     player.dp = pkmath.v2(0, 0)
     if user_input.move_up:
         player.dp = pkmath.add(player.dp, pkmath.v2(0, -50))
@@ -38,6 +43,9 @@ def updateAndRender(user_input, window_surface,
     tile_map_count_x = len(tile_map[0])
     tile_map_count_y = len(tile_map)
 
+    # NOTE(hugo): collision test
+    # TODO(hugo): we should check if those number are in the proper range
+    # but maybe if we wrap things up it'll be obvious afterwards
     player_tl_tile_x = int(player_next_p.x / tile_size)
     player_tl_tile_y = int(player_next_p.y / tile_size)
     player_br_tile_x = int((player_next_p.x + player.w) / tile_size)
@@ -64,4 +72,3 @@ def updateAndRender(user_input, window_surface,
 
     player_rect = pygame.Rect(player.p.x, player.p.y, player.w, player.h)
     window_surface.fill(pkcolor.red, player_rect)
-    return (player.p.x, player.p.y)
