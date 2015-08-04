@@ -20,7 +20,7 @@ if __name__ == "__main__":
     game_running = True
     user_input = input.UserInput()
     window_surface = pygame.display.get_surface()
-    player = game.Player(100, 100, 45, 45)
+    player = game.Player(100, 100, 30, 30)
     frame_per_second = 30
 
     while game_running:

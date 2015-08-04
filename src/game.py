@@ -42,10 +42,12 @@ def updateAndRender(user_input, window_surface,
     player_tl_tile_y = int(player_next_p.y / tile_size)
     player_br_tile_x = int((player_next_p.x + player.w) / tile_size)
     player_br_tile_y = int((player_next_p.y + player.h) / tile_size)
-    print(player_br_tile_x)
+
     if tile_map[player_tl_tile_y][player_tl_tile_x] == 0:
         if tile_map[player_br_tile_y][player_br_tile_x] == 0:
-            player.p = player_next_p
+            if tile_map[player_tl_tile_y][player_br_tile_x] == 0:
+                if tile_map[player_br_tile_y][player_tl_tile_x] == 0:
+                    player.p = player_next_p
 
     # NOTE(hugo): Rendering
     for i in range(tile_map_count_y):

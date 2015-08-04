@@ -9,7 +9,7 @@ class UserInput:
         self.move_right = False
         self.action = False
         self.use_controller = False
-        self.dt = 0.03333333 # NOTE(hugo): the time (in s) between two frames
+        self.dt = 0.03333333  # NOTE(hugo): the time (in s) between two frames
 
     def processEvent(self, event):
         if event.type == pygame.KEYDOWN:
