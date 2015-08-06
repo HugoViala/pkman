@@ -15,6 +15,8 @@ class Player:
         self.w = w
         self.h = h
         self.speed = speed
+        # TODO(hugo): maybe change the way we position the player
+        # with (maybe) a tile pos and an offset pos in the tile
 
 
 def updateAndRender(user_input, gamestate):
@@ -25,14 +27,18 @@ def updateAndRender(user_input, gamestate):
     # for a better game feel
     player = gamestate.player
     player.dp = pkmath.v2(0, 0)
-    if user_input.move_up:
-        player.dp = pkmath.add(player.dp, pkmath.v2(0, -1))
-    if user_input.move_down:
-        player.dp = pkmath.add(player.dp, pkmath.v2(0, 1))
-    if user_input.move_left:
-        player.dp = pkmath.add(player.dp, pkmath.v2(-1, 0))
-    if user_input.move_right:
-        player.dp = pkmath.add(player.dp, pkmath.v2(1, 0))
+    if not user_input.use_controller:
+        if user_input.move_up:
+            player.dp = pkmath.add(player.dp, pkmath.v2(0, -1))
+        if user_input.move_down:
+            player.dp = pkmath.add(player.dp, pkmath.v2(0, 1))
+        if user_input.move_left:
+            player.dp = pkmath.add(player.dp, pkmath.v2(-1, 0))
+        if user_input.move_right:
+            player.dp = pkmath.add(player.dp, pkmath.v2(1, 0))
+    else:
+        player.dp = user_input.axis_motion
+
     player.dp = pkmath.normalize(player.dp)
     player.dp = pkmath.times(player.speed, player.dp)
     player_next_p = pkmath.add(player.p, pkmath.times(user_input.dt, player.dp))

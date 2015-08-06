@@ -3,9 +3,6 @@ import input
 import game
 import pkcolor
 
-# TODO(hugo): make it so that game module does not have to import pygame ?
-# like, the updateAndRender function could return the game state and the list
-# of the rect do display for the window_surface => cleaner
 # TODO(hugo): the rendering is buggy is the upper and left border of the
 # window
 
@@ -22,6 +19,7 @@ if __name__ == "__main__":
     window_surface = pygame.display.get_surface()
     frame_per_second = 30
 
+    # NOTE(hugo): game loop
     while gamestate.running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -36,4 +34,6 @@ if __name__ == "__main__":
             window_surface.fill(c,r)
         pygame.display.flip()
         clock.tick(30)
+
+    # NOTE(hugo): goodbye !
     pygame.quit()
