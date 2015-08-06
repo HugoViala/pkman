@@ -44,13 +44,17 @@ class UserInput:
             # maybe they are related to deadzones or with the
             # implementation in game.py module...
             self.use_controller = True
-            if event.dict["value"] >= 0.1  or event.dict["value"] <= -0.1:
-                if event.dict["axis"] == 0:
+            JOYSTICK_DEADZONE = 0.18
+            if event.dict["axis"] == 0:
+                if event.dict["value"] >= JOYSTICK_DEADZONE or event.dict["value"] <= -JOYSTICK_DEADZONE:
                     self.axis_motion.x = event.dict["value"]
-                elif event.dict["axis"] == 1:
+                else:
+                    self.axis_motion.x = 0
+            elif event.dict["axis"] == 1:
+                if event.dict["value"] >= JOYSTICK_DEADZONE or event.dict["value"] <= -JOYSTICK_DEADZONE:
                     self.axis_motion.y = event.dict["value"]
-            else:
-                self.axis_motion = pkmath.v2()
+                else:
+                    self.axis_motion.y = 0
             print(self.axis_motion.x, self.axis_motion.y)
 
     def reset(self):

@@ -39,7 +39,9 @@ def updateAndRender(user_input, gamestate):
     else:
         player.dp = user_input.axis_motion
 
-    player.dp = pkmath.normalize(player.dp)
+    # NOTE(hugo): better gamefeel with normalizing only without controller
+    if not user_input.use_controller:
+        player.dp = pkmath.normalize(player.dp)
     player.dp = pkmath.times(player.speed, player.dp)
     player_next_p = pkmath.add(player.p, pkmath.times(user_input.dt, player.dp))
 
