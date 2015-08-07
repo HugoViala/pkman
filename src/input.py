@@ -40,9 +40,6 @@ class UserInput:
             if event.key == pygame.K_DOWN:
                 self.move_down = False
         if event.type == pygame.JOYAXISMOTION:
-            # TODO(hugo): still a few bugs to investigate
-            # maybe they are related to deadzones or with the
-            # implementation in game.py module...
             self.use_controller = True
             JOYSTICK_DEADZONE = 0.18
             if event.dict["axis"] == 0:
@@ -55,7 +52,6 @@ class UserInput:
                     self.axis_motion.y = event.dict["value"]
                 else:
                     self.axis_motion.y = 0
-            print(self.axis_motion.x, self.axis_motion.y)
 
     def reset(self):
         self.__init__()

@@ -11,7 +11,7 @@ if __name__ == "__main__":
     # NOTE(hugo): initializing lots of stuff
     pygame.init()
     clock = pygame.time.Clock()
-    window_size = (700, 500)
+    window_size = (700, 650)
     screen = pygame.display.set_mode(window_size)
     pygame.display.set_caption("PKMAN")
     gamestate = game.GameState()
